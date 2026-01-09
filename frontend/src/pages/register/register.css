@@ -105,3 +105,14 @@ html, body{
   border-color: blue;
   outline: none;
 }
+.btn-sub{
+  color: white;
+  cursor: pointer;
+  font-size: large;
+  margin-top: 5px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: cornflowerblue;
+}

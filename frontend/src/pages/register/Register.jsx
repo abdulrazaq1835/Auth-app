@@ -1,5 +1,6 @@
 import React from "react";
 import './register.css'
+import { NavLink } from 'react-router-dom'
 
 const Register = () => {
   return (
@@ -21,11 +22,12 @@ const Register = () => {
             <input className="input" type="password" placeholder="Enter Password" />
           </div>
 
-          <button className="btn-sub">Submit</button>
+           <button className="btn-sub">Submit</button>
         </form>
+       
         <div>
-            <p>Already have account</p>
-            <a href="/login">Login</a>
+            <p>Already have account? <NavLink to="/login">Login</NavLink></p>
+            
         </div>
       </div>
     </div>
