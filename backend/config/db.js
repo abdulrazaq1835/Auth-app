@@ -7,7 +7,7 @@ let db;
 
 const connectDB = async () => {
   try {
-    db = createConnection({
+    db = await createConnection({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,

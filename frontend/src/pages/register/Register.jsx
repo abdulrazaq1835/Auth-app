@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/auth/register", {
-        name,
+       name,
         email,
         password,
       });
@@ -23,6 +23,7 @@ const Register = () => {
         alert("registerd successfully");
       }
     } catch (error) {
+      alert("error")
       console.log(error);
     }
   };
