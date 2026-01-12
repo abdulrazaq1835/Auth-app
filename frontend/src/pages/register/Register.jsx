@@ -19,8 +19,11 @@ const Register = () => {
         password,
       });
 
-      if (response) {
+      if (response.status===201) {
         alert("registerd successfully");
+        setName("")
+        setEmail("")
+        setPassword("")
       }
     } catch (error) {
       alert("error")
@@ -38,7 +41,7 @@ const Register = () => {
               UserName
             </label>
             <input
-              className="input"
+              className="input" value={name}
               onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="Enter Username"
@@ -50,7 +53,7 @@ const Register = () => {
               Email
             </label>
             <input
-              className="input"
+              className="input" value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Enter Email"
@@ -61,7 +64,7 @@ const Register = () => {
               Password
             </label>
             <input
-              className="input"
+              className="input" value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Enter Password"
