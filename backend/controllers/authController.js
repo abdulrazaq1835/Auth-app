@@ -21,7 +21,7 @@ export async function register(req,res) {
 
     res.status(201).json({message:"user created successfully"})
    } catch (error) {
-       console.log("REGISTER ERROR 👉", error); // 👈 THIS IS THE KEY
+       console.log("REGISTER ERROR 👉", error);
   return res.status(500).json({message:"Internal server error"});
    }
     
