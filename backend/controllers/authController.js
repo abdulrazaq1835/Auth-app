@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
-import { getDB } from "../config/db.js";
+
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { getDB } from "../config/db.js"
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ export async function register(req, res) {
   try {
     const db = getDB();
 
-    //   console.log(db)
+   
     const [rows] = await db.query("select * from users where email = ?", [
       email,
     ]);
@@ -68,24 +69,25 @@ export async function login(req, res) {
 }
 
 
-export const getUser = async(req,res)=>{
-try {
-    const db = getDB();
 
-    const [rows] = await db.query(
-      "SELECT name FROM users WHERE id = ?",
-      [req.userId]
+
+export const getUser = async (req, res) => {
+  try {
+     const userId = req.userId;
+
+    const db = getDB();
+    const [rows] = await db.execute(
+      "SELECT id, name, email, auth_provider FROM users WHERE id = ?",
+      [userId]
     );
 
     if (rows.length === 0) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({
-      name: rows[0].name,
-    });
-
+    res.status(200).json(rows[0]);
   } catch (error) {
+    console.log("GET USER ERROR ", error);
     res.status(500).json({ message: "Server error" });
   }
-}
+};
