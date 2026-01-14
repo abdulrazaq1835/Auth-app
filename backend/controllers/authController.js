@@ -66,3 +66,26 @@ export async function login(req, res) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
+
+
+export const getUser = async(req,res)=>{
+try {
+    const db = getDB();
+
+    const [rows] = await db.query(
+      "SELECT name FROM users WHERE id = ?",
+      [req.userId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      name: rows[0].name,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+}

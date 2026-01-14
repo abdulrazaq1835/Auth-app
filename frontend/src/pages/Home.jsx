@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
 
   const fetchUser = async () => {
     try {
@@ -23,10 +24,9 @@ const Home = () => {
         }
       );
 
-      console.log(response.data);
+      setName(response.data.name);
 
     } catch (error) {
-      console.log(error.response?.data);
       navigate("/login");
     }
   };
@@ -36,8 +36,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h2>HELLO HOME</h2>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <h1>Welcome, {name} 👋</h1>
     </div>
   );
 };

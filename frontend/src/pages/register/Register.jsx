@@ -1,13 +1,14 @@
 import React from "react";
 import "./register.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
+  const navigate  = useNavigate()
 
   const handleSubmit = async (e) => {
    
@@ -21,6 +22,7 @@ const Register = () => {
 
       if (response.status===201) {
         alert("registerd successfully");
+        navigate('/login')
         setName("")
         setEmail("")
         setPassword("")
