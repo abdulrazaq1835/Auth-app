@@ -77,6 +77,17 @@ const Register = () => {
             Submit
           </button>
         </form>
+        <div style={{ marginTop: "20px" }}>
+  <button
+    className="btn-google"
+    onClick={() =>
+      window.open("http://localhost:5000/auth/google", "_self")
+    }
+  >
+    Login with Google
+  </button>
+</div>
+
 
         <div>
           <p>
