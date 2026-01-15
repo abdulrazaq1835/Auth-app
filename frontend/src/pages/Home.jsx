@@ -10,7 +10,7 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
 
-      if (!token) {
+      if (!token) {  //
         navigate("/login");
         return;
       }
