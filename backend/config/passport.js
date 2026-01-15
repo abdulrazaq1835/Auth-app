@@ -1,44 +1,50 @@
 import passport from "passport";
-import GoogleStratergy from 'passport-google-oauth20'
+import GoogleStrategy from 'passport-google-oauth20';
 import { getDB } from "./db.js";
+import { configDotenv } from "dotenv";
 
-passport.use(new GoogleStratergy (
+passport.use(new GoogleStrategy.Strategy(  // ← Note: .Strategy
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: "http://localhost:5000/auth/google/callback",
     },
 
-    async(accessToken,refreshToken,profile,done)=>{
+    async (accessToken, refreshToken, profile, done) => {
         try {
-            
-            const  db  = getDB()
+            const db = getDB();
 
-            const email  = profile.email[0].value
+            // ✅ Fixed: 'emails' (plural) with safe access
+            const email = profile.emails?.[0]?.value;
 
-            const [rows] = db.execute(
-                "select * from users  where email = ?",[email]
-            )
-       
-            if(rows.length > 0) {
-                return done(null, rows[0])
+            // Check if email exists
+            if (!email) {
+                return done(new Error('No email found in Google profile'), null);
             }
 
-              const [result] = await db.execute(
-          "INSERT INTO users (name, email, google_id) VALUES (?, ?, ?)",
-          [profile.displayName, email, profile.id]
-        )
+            const [rows] = await db.execute(
+                "SELECT * FROM users WHERE email = ?", [email]
+            );
+       
+            if (rows.length > 0) {
+                return done(null, rows[0]);
+            }
 
-        return done(null, {
-          id: result.insertId,
-          name: profile.displayName,
-          email,
-        })
+            const [result] = await db.execute(
+                "INSERT INTO users (name, email, google_id) VALUES (?, ?, ?)",
+                [profile.displayName, email, profile.id]
+            );
+
+            return done(null, {
+                id: result.insertId,
+                name: profile.displayName,
+                email,
+            });
 
         } catch (error) {
-              return done(err, null)
+            return done(error, null);
         }
     }
-))
+));
 
 export default passport;

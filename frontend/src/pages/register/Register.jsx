@@ -22,7 +22,7 @@ const Register = () => {
 
       if (response.status===201) {
         alert("registerd successfully");
-        navigate('/login')
+        navigate('/home')
         setName("")
         setEmail("")
         setPassword("")
@@ -84,6 +84,7 @@ const Register = () => {
       window.open("http://localhost:5000/auth/google", "_self")
     }
   >
+    <img src="https://imgs.search.brave.com/kZt1tVCEekCPQSwPcgVUwePcBPaf91migsBz5s_SFZY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMTU4NC9Q/TkcvOTYvMzcyMTY3/MS1nb29nbGVfMTA4/MDU0LnBuZw"/>
     Login with Google
   </button>
 </div>

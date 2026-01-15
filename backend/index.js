@@ -3,11 +3,19 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import authRoutes from './routes/authRoutes.js'
+import passport from "passport";
+import "./config/passport.js"
 
 dotenv.config()
 const app = express();
 
-app.use(cors())
+app.use(passport.initialize())
+
+app.use(cors({
+  origin:process.env.UI_URL,
+  credentials:true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 app.use(express.json());
 
