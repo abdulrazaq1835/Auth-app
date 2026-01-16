@@ -6,7 +6,7 @@ import authRoutes from './routes/authRoutes.js'
 import passport from "passport";
 import "./config/passport.js"
 import path from 'path'
-import { get } from "http";
+
 
 dotenv.config()
 const app = express();

@@ -1,5 +1,6 @@
 import sql, { createConnection } from "mysql2/promise";
 import dotenv from "dotenv";
+import { createPool } from "mysql/promise";
 
 dotenv.config();
 
@@ -7,7 +8,7 @@ let db;
 
 const connectDB = async () => {
   try {
-    db = await createConnection({
+    db = await createPool({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
