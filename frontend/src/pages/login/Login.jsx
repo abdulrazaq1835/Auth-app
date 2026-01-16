@@ -13,7 +13,7 @@ const navigate =  useNavigate()
 const handleSubmit = async (e)=>{
   e.preventDefault()
   try {
-      const response  = await axios.post("http://localhost:5000/auth/login",{email,password})
+      const response  = await axios.post(`${API_URL}/auth/login`,{email,password})
   
       if(response.status === 200){
         localStorage.setItem("token",response.data.token)
@@ -50,7 +50,7 @@ const handleSubmit = async (e)=>{
   <button
     className="btn-google"
     onClick={() =>
-      window.open("http://localhost:5000/auth/google", "_self")
+      window.open(`${API_URL}/auth/google`, "_self")
     }
   >
     <img src="https://imgs.search.brave.com/kZt1tVCEekCPQSwPcgVUwePcBPaf91migsBz5s_SFZY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMTU4NC9Q/TkcvOTYvMzcyMTY3/MS1nb29nbGVfMTA4/MDU0LnBuZw"/>
