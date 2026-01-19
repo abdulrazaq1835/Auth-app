@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { getDB } from "../config/db.js"
 
 dotenv.config();
-
+  // async functon
 export async function register(req, res) {
   const { name, email, password } = req.body;
 

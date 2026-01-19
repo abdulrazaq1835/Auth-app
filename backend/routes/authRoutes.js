@@ -3,6 +3,9 @@ import passport from "passport"
 import jwt from "jsonwebtoken"
 import { getUser, login, register } from "../controllers/authController.js"
 import protect from "../middleware/authMiddleware.js"
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const router = express.Router()
 
@@ -26,7 +29,7 @@ router.get(
     
     
 
-      res.redirect(`http://localhost:5173/home?token=${token}`)
+      res.redirect(`${process.env.UI_URL}/home?token=${token}`)
   }
 )
 
